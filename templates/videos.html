@@ -2,17 +2,88 @@
 <html>
 <head>
     <title>Videos</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd; /* Light Blue */
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #1e88e5; /* Blue */
+            font-size: 2em;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            background-color: #bbdefb; /* Light Blue */
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        ul li:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        a {
+            text-decoration: none;
+            color: #1976d2; /* Blue */
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0d47a1; /* Dark Blue */
+        }
+
+        .add-video {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #1976d2; /* Blue */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .add-video:hover {
+            background-color: #0d47a1; /* Dark Blue */
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Videos</h1>
         <ul>
             {% for video in videos %}
-            <li><a href="{{ video[3] }}">{{ video[2] }}</a></li>
+                <li>{{ video[2] }} - <a href="{{ video[3] }}">Watch</a></li>
             {% endfor %}
         </ul>
-        <a href="/add_video/{{ videos[0][1] }}">Add Video</a>
+        <a href="/add_videos/{{ course_id }}" class="add-video">Add Video</a>
     </div>
 </body>
 </html>

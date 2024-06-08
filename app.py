@@ -43,17 +43,16 @@ def add_course():
 @app.route('/videos/<int:course_id>')
 def videos(course_id):
     videos = fetch_data('SELECT * FROM videos WHERE course_id = ?;', (course_id,))
-    return render_template('videos.html', videos=videos)
+    return render_template('videos.html', videos=videos, course_id=course_id)
 
-@app.route('/add_video/<int:course_id>', methods=['GET', 'POST'])
+@app.route('/add_videos/<int:course_id>', methods=['GET', 'POST'])
 def add_video(course_id):
     if request.method == 'POST':
         title = request.form['title']
         url = request.form['url']
         execute_query('INSERT INTO videos (course_id, title, url) VALUES (?, ?, ?);', (course_id, title, url))
-        execute_query('INSERT INTO log (timestamp, action, table_name) VALUES (?, ?, ?);', (datetime.datetime.now(), 'INSERT', 'videos'))
         return redirect(f'/videos/{course_id}')
-    return render_template('add_video.html', course_id=course_id)
+    return render_template('add_videos.html', course_id=course_id)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -15,6 +15,9 @@ cur.execute('''CREATE TABLE IF NOT EXISTS log (
                 action TEXT,
                 table_name TEXT
             );''')
+cur.execute('''
+            Create table if not exists videos (id int auto_increment, course_id int, title varchar, URL text)
+            ''')
 cur.execute('''CREATE TRIGGER IF NOT EXISTS log_course_insert
     AFTER INSERT ON courses
     BEGIN
@@ -22,10 +25,7 @@ cur.execute('''CREATE TRIGGER IF NOT EXISTS log_course_insert
         VALUES (datetime('now'), 'INSERT', 'courses');
     END;
 ''')
-cur.execute('''CREATE VIEW IF NOT EXISTS course_videos AS
-               SELECT c.id as course_id, c.name as course_name, c.link as course_link,
-                      v.id as video_id, v.title as video_title, v.url as video_url
-               FROM courses c LEFT JOIN videos v ON c.id = v.course_id;
+cur.execute('''CREATE VIEW course_videos as Select course_id, title from videos where title = 'Java'           
 ''')
 conn.commit()
 conn.close()
