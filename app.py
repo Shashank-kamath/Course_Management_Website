@@ -23,7 +23,7 @@ def fetch_data(query, params=()):
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return redirect('courses')
 
 @app.route('/courses')
 def courses():
